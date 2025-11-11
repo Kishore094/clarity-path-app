@@ -726,7 +726,7 @@ const Dashboard = ({ logs, loading, todaysPlan }) => {
     };
 
     try {
-      const apiKey = "AIzaSyDI0VYQ7RVvUbTEOCieHMnvPcZEeh2tFG8"; 
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
       const payload = {
         contents: [{
@@ -795,7 +795,7 @@ const Dashboard = ({ logs, loading, todaysPlan }) => {
     const dailyLogsArray = Object.values(logsByDay);
 
     try {
-      const apiKey = ""; 
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
       
       const payload = {
@@ -1008,7 +1008,7 @@ const LogScreen = ({ logs, loading, error }) => {
     };
 
     try {
-      const apiKey = ""; 
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
       
       const payload = {
@@ -1294,7 +1294,7 @@ const AICoach = ({ logs, fetcher, systemPrompt, onExit }) => {
     const promptText = `RECENT LOGS (for your memory):\n${JSON.stringify(dailyLogsArray)}\n\nUSER QUESTION:\n${userInput}`;
     
     try {
-      const apiKey = ""; 
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
       
       const payload = {
@@ -1472,7 +1472,7 @@ const WeightLog = ({ weightLogs, allLogs }) => {
     };
 
     try {
-      const apiKey = ""; 
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
       
       const payload = {
@@ -1642,7 +1642,7 @@ const DietScreen = () => {
     setProductAnalysisError(null);
     
     try {
-      const apiKey = ""; 
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
       
       const payload = {
@@ -2055,7 +2055,7 @@ const LogEntryForm = ({ onSuccess, selectedDate, prefillData }) => {
     setAnalysisResult("");
 
     try {
-      const apiKey = ""; 
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
       
       const payload = {
@@ -2336,7 +2336,7 @@ const MealIdeaModal = ({ isOpen, onClose, onLogMeal }) => {
     setRecipeData(null);
 
     try {
-      const apiKey = ""; 
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
       
       const payload = {
@@ -2508,7 +2508,7 @@ const ShoppingListModal = ({ isOpen, onClose, todaysPlan }) => {
     setListHtml("");
 
     try {
-      const apiKey = ""; 
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
       
       const payload = {
