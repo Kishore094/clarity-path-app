@@ -726,7 +726,7 @@ const Dashboard = ({ logs, loading, todaysPlan }) => {
     };
 
     try {
-      const apiKey = "AIzaSyBqIA7nAiVVsaWiYPV8WLtw1fCMaP6uG3I"; 
+      const apiKey = "AIzaSyDI0VYQ7RVvUbTEOCieHMnvPcZEeh2tFG8"; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
       const payload = {
         contents: [{
