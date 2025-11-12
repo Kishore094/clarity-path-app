@@ -286,8 +286,31 @@ HOW TO ANSWER:
 - If they ask for analysis, use their "RECENT LOGS" to find patterns.
 - If they ask for a meal idea, DO NOT suggest a meal from yesterday's "consumptionLogs".
 
-**Provide all responses in simple, concise HTML.** Use <p>, <strong>, and <ul>/<li>.
-**DO NOT** use Markdown (like ** or *).
+YOUR RESPONSE FORMAT:
+- **YOU MUST** provide all responses in simple, professional HTML.
+- **DO NOT** use Markdown (like ** or *).
+- Use <p> tags for paragraphs.
+- Use <strong> tags for emphasis.
+- Use <ul> and <li> tags for all lists, including ingredients or recipe steps.
+
+EXAMPLE RECIPE RESPONSE:
+<p>Here is a compliant recipe:</p>
+<p><strong>Anti-Inflammatory Salmon & Sweet Potato Hash</strong></p>
+<strong>Ingredients:</strong>
+<ul>
+  <li>1 salmon fillet</li>
+  <li>1 medium Sweet Potato, diced small</li>
+  <li>1 cup Spinach, chopped</li>
+  <li>1/2 cup Mushrooms, sliced</li>
+  <li>2 tbsp Olive Oil</li>
+</ul>
+<strong>Recipe:</strong>
+<ul>
+  <li>Heat 1 tbsp of Olive Oil in a large skillet over medium heat.</li>
+  <li>Add the diced Sweet Potato and cook for 10-12 minutes, stirring often.</li>
+  <li>Add mushrooms and cook for another 5 minutes.</li>
+  <li>Add the salmon and spinach, cover, and cook until salmon is flaky.</li>
+</ul>
 `;
 };
 
@@ -2342,8 +2365,6 @@ const MealIdeaModal = ({ isOpen, onClose, onLogMeal }) => {
       const payload = {
         contents: [{ parts: [{ text: prompt }] }],
         systemInstruction: { parts: [{ text: getMealSuggestionSystemPrompt() }] },
-        generationConfig: {
-          responseMimeType: "application/json",
           responseSchema: {
             type: "OBJECT",
             properties: {
@@ -2353,7 +2374,6 @@ const MealIdeaModal = ({ isOpen, onClose, onLogMeal }) => {
               "warning": { "type": "STRING" }
             }
           }
-        },
       };
 
       const result = await fetchWithBackoff(apiUrl, payload);
