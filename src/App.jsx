@@ -2380,8 +2380,20 @@ const MealIdeaModal = ({ isOpen, onClose, onLogMeal }) => {
       const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
 
       if (jsonText) {
-        const parsedData = JSON.parse(jsonText);
+        // [NEW FIX] Clean the AI response to find the JSON block
+        const match = jsonText.match(/\{[\s\S]*\}/);
+        
+        if (!match) {
+          // AI did not return JSON (e.g., returned a refusal)
+          console.error("AI did not return valid JSON. Response:", jsonText);
+          throw new Error("AI did not return a valid recipe structure.");
+        }
+
+        // Get the cleaned-up JSON string
+        const cleanedJsonText = match[0];
+        const parsedData = JSON.parse(cleanedJsonText);
         setRecipeData(parsedData);
+
       } else {
         throw new Error("No recipe data returned from AI.");
       }
