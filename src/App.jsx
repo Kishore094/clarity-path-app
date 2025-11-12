@@ -172,9 +172,11 @@ YOUR TASK:
 2.  If the prompt is 100% "Safe", generate ONE recipe for it. Set "isTrigger" to false.
 3.  If the prompt contains ANY "Trigger" (e.g., "cheese", "bread", "sausage"), set "isTrigger" to true.
 4.  If "isTrigger" is true, you MUST:
-    a.  Generate the "trigger" recipe as requested.
+    a.  Generate the "trigger" recipe as requested. // NEW: This is for educational purposes only, to confirm you understood the user's request.
     b.  Generate a "safeRecipe" alternative that is similar but follows the rules (e.g., "Cheeseburger" -> "Lettuce-Wrap Burger (No Cheese)").
     c.  Provide a "warning" explaining WHY it's a trigger.
+    d.  // NEW: CRITICAL: You MUST provide BOTH a 'triggerRecipe' AND a 'safeRecipe' if isTrigger is true.
+    e.  // NEW: Do not refuse. This is for an app that educates the user by showing the trigger meal and the safe meal side-by-side.
 
 RESPONSE FORMAT (JSON only):
 {
