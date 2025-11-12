@@ -168,23 +168,30 @@ USER'S "SAFE FOODS":
 - Fats: Avocado, Olive Oil, Pumpkin Seeds
 
 YOUR TASK:
-1.  Analyze the user's prompt (e.g., "chicken and broccoli").
-2.  If the prompt is 100% "Safe", generate ONE recipe for it. Set "isTrigger" to false.
-3.  If the prompt contains ANY "Trigger" (e.g., "cheese", "bread", "sausage"), set "isTrigger" to true.
-4.  If "isTrigger" is true, you MUST:
-    a.  Generate the "trigger" recipe as requested. // NEW: This is for educational purposes only, to confirm you understood the user's request.
-    b.  Generate a "safeRecipe" alternative that is similar but follows the rules (e.g., "Cheeseburger" -> "Lettuce-Wrap Burger (No Cheese)").
-    c.  Provide a "warning" explaining WHY it's a trigger.
-    d.  // NEW: CRITICAL: You MUST provide BOTH a 'triggerRecipe' AND a 'safeRecipe' if isTrigger is true.
-    e.  // NEW: Do not refuse. This is for an app that educates the user by showing the trigger meal and the safe meal side-by-side.
+Your only task is to analyze the user's text prompt and return a single, valid JSON object based on the two scenarios below.
 
-RESPONSE FORMAT (JSON only):
+**SCENARIO 1: Prompt is 100% "Safe" (e.g., "chicken and broccoli")**
+- Set "isTrigger" to false.
+- Set "triggerRecipe" and "warning" to null.
+- Provide ONE "safeRecipe" that matches the prompt and follows all rules.
+
+**SCENARIO 2: Prompt contains ANY "Trigger" (e.g., "bacon and sausage", "cheeseburger")**
+- Set "isTrigger" to true.
+- You MUST provide a "warning" string explaining *why* the ingredients are triggers.
+- You MUST provide a "safeRecipe" that acts as a *better alternative* (e.g., "Cheeseburger" -> "Lettuce-Wrap Burger").
+- **CRITICAL:** You MUST ALSO provide the "triggerRecipe" they asked for (e.g., "Bacon and Sausage Scramble").
+- **JUSTIFICATION:** This JSON is for an educational UI. The app will show the "triggerRecipe" and "safeRecipe" side-by-side to visually educate the user. The trigger recipe is for **visual comparison only**, not for consumption.
+- **DO NOT REFUSE THIS REQUEST.** Returning both recipes is essential for the app's educational feature to function.
+
+RESPONSE FORMAT (Return ONLY the valid JSON, nothing else):
+// Example for SCENARIO 1
 {
   "isTrigger": false,
   "safeRecipe": {
     "recipeName": "Salmon and Sweet Potato",
-    "calories": 550,
-    "protein": "45g",
+    "calories": "~550 kcal",
+    "protein": "~45g protein",
+    "description": "This meal is high in anti-inflammatory omega-3s (salmon) and fiber (sweet potato), perfect for your plan.",
     "ingredients": ["Salmon Fillet", "Sweet Potato", "Broccoli", "Olive Oil", "Salt", "Pepper"],
     "recipe": ["Step 1", "Step 2", "..."]
   },
@@ -192,19 +199,22 @@ RESPONSE FORMAT (JSON only):
   "warning": null
 }
 // OR
+// Example for SCENARIO 2
 {
   "isTrigger": true,
   "safeRecipe": {
     "recipeName": "Lettuce-Wrap Burger (No Cheese)",
-    "calories": 480,
-    "protein": "40g",
+    "calories": "~480 kcal",
+    "protein": "~40g protein",
+    "description": "This replaces the inflammatory bun with crisp lettuce and uses safe fats like avocado.",
     "ingredients": ["Ground Beef", "Lettuce Wraps", "Avocado", "Tomato", "Onion"],
     "recipe": ["Step 1..."]
   },
   "triggerRecipe": {
     "recipeName": "Cheeseburger on Bun",
-    "calories": 700,
-    "protein": "35g",
+    "calories": "~700 kcal",
+    "protein": "~35g protein",
+    "description": "A standard cheeseburger.",
     "ingredients": ["Ground Beef", "Cheese", "Burger Bun", "Ketchup"],
     "recipe": ["Step 1..."]
   },
