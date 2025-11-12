@@ -1343,7 +1343,10 @@ const AICoach = ({ logs, fetcher, systemPrompt, onExit }) => {
       const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
       
       if (text) {
-        setMessages(prev => [...prev, { role: 'model', content: text }]);
+        // [NEW FIX] Force all newlines (\n) to be HTML line breaks (<br>)
+        const formattedText = text.replace(/\n/g, '<br />');
+        
+        setMessages(prev => [...prev, { role: 'model', content: formattedText }]);
       } else {
         throw new Error("No response text from AI.");
       }
