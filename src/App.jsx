@@ -2379,17 +2379,7 @@ const MealIdeaModal = ({ isOpen, onClose, onLogMeal }) => {
       const payload = {
         contents: [{ parts: [{ text: prompt }] }],
         systemInstruction: { parts: [{ text: getMealSuggestionSystemPrompt() }] },
-          responseSchema: {
-            type: "OBJECT",
-            properties: {
-              "isTrigger": { "type": "BOOLEAN" },
-              "safeRecipe": { "type": "OBJECT" },
-              "triggerRecipe": { "type": "OBJECT" },
-              "warning": { "type": "STRING" }
-            }
-          }
       };
-
       const result = await fetchWithBackoff(apiUrl, payload);
       const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
 
